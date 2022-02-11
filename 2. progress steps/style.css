@@ -1,0 +1,99 @@
+/* custom css variables */
+:root {
+  --line-border-fill: #3498db;
+  --line-border-empty: #e0e0e0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  text-align: center;
+}
+
+.progress-container {
+  display: flex;
+  justify-content: space-between;
+  width: 350px;
+  max-width: 100%;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.circle {
+  border: 3px solid var(--line-border-empty);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  transition: 0.4s ease;
+}
+
+.circle.active {
+  border-color: var(--line-border-fill);
+}
+
+/* ::before creates a pseudo-element that is the first child of the selected element. */
+/* This is the grey placeholder line in the back of progress bar */
+.progress-container::before {
+  content: "";
+  background-color: var(--line-border-empty);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  /* transfrom lets you rotate, scale, skew, or translate an element. */
+  /* the top:50% just makes the top of this line is in the middle */
+  transform: translateY(-50%);
+  height: 4px;
+  width: 100%;
+  z-index: -1;
+}
+
+/* this is the actual progress bar, we will control the width in js */
+.progress {
+  position: absolute;
+  left: 0;
+  background-color: var(--line-border-fill);
+  height: 4px;
+  width: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: -1;
+  transition: 0.4s ease;
+}
+
+.btn {
+  background-color: var(--line-border-fill);
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px 30px;
+  margin: 5px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+.btn:disabled {
+  background-color: var(--line-border-empty);
+  cursor: not-allowed;
+}
+
+.btn:focus {
+  outline: 0;
+}
+/* when clicking on the button, it should have the scaling effect */
+.btn:active {
+  transform: scale(0.98);
+}
